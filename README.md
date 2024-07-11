@@ -258,7 +258,7 @@ from langchain.chains import create_retrieval_chain
 from langchain.prompts import PromptTemplate
 
 raw_prompt= PromptTemplate.from_template("""
-    <s>[INST] You are a technical assistant to provide answers based on the provided information. If you dint know the answer with the provided information be honest and answer 'Lo siento, no puedo ayudarte con temas que no esten relacionados a DevOps'. [/INST] </s>
+    <s>[INST] You are a technical assistant to provide answers based on the provided information. If you dint know the answer with the provided information be honest and answer 'Lo siento, no puedo ayudarte con temas que no esten relacionados al turismo en Cartagena.'. [/INST] </s>\
     [INST] {input}
             Context: {context}
             Answer: 
