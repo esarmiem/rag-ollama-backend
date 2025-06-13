@@ -12,7 +12,7 @@ app= Flask(__name__)
 
 folder_path ="db"
 
-llm= Ollama(model="llama3", temperature=0.3, num_predict=512) #el num_predict es el tamaño del prompt que se le pasa al modelo de LLM (conocido como max tokens)
+llm= Ollama(model="deepseek-r1:8b", temperature=0.3, num_predict=512) #el num_predict es el tamaño del prompt que se le pasa al modelo de LLM (conocido como max tokens)
 embedding = FastEmbedEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2") #el modelo de embedding que agregue para los pdf en español
 text_splitter= RecursiveCharacterTextSplitter(
     chunk_size= 1024, chunk_overlap=80, 
@@ -21,7 +21,7 @@ text_splitter= RecursiveCharacterTextSplitter(
 
 
 raw_prompt= PromptTemplate.from_template("""
-    <s>[INST] You are a technical assistant to provide answers based only on the provided information.If you dont know the answer with the provided information be honest and answer: 'Lo siento, no puedo ayudarte con temas que no esten relacionados a información de Cartagena' [/INST] </s>
+    <s>[INST] You are a technical assistant to provide answers based only on the provided information. If you dont know the answer with the provided information be honest and answer: 'Lo siento, no puedo ayudarte con temas que no esten relacionados a información con la que fui entrenado' [/INST] </s>
     [INST] {input}
             Context: {context}
             Answer: 
