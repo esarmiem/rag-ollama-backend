@@ -333,6 +333,22 @@ Ejecuta tu aplicación con el comando
  python .\app.py
 ```
 
+Flujo completo recomendado:
+# 1. Crear entorno virtual (solo la primera vez)
+python3 -m venv venv
+
+# 2. Activar entorno virtual
+source myenv/bin/activate
+
+# 3. Instalar dependencias (solo la primera vez o cuando cambien)
+pip3 install -r requirements.txt
+
+# 4. Levantar la aplicación
+python3 app.py
+
+# 5. Cuando termines, desactivar el entorno
+deactivate
+
 Perfecto! ahora tienes tu propio asistente que responde solo basandose en la información que le proporcionaste. 😉
 
 ## By: [Elder Sarmiento](https://www.linkedin.com/in/elder-sarmiento/)
