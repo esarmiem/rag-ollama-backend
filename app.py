@@ -1,5 +1,6 @@
 from flask import Flask, request
 import os
+from flask_cors import CORS
 from langchain_community.llms import Ollama
 from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -14,6 +15,7 @@ import shutil
 import time
 
 app= Flask(__name__)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}})
 
 folder_path ="db"
 
@@ -26,7 +28,7 @@ text_splitter= RecursiveCharacterTextSplitter(
 
 
 raw_prompt= PromptTemplate.from_template("""
-    <s>[INST] You are a technical assistant to provide answers based only on the provided information. If you dont know the answer with the provided information be honest and answer: 'Lo siento, no puedo ayudarte con temas que no esten relacionados a información con la que fui entrenado' [/INST] </s>
+    <s>[INST] Eres un asistente técnico que proporciona respuestas basadas únicamente en la información proporcionada. Si no conoces la respuesta con la información proporcionada, sé honesto y responde: 'Lo siento, no puedo ayudarte con temas que no estén relacionados a información con la que fui entrenado'. Todas las respuestas deben ser en español. [/INST] </s>
     [INST] {input}
             Context: {context}
             Answer: 
