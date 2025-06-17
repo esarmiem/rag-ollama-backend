@@ -13,6 +13,7 @@ from chromadb import Client
 from chromadb.config import Settings
 import shutil 
 import time
+from openai_handler import ask_pdf_with_openai
 
 app= Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}})
@@ -105,6 +106,21 @@ def askPDFPost():
     
     response_answer= {"respuesta": result['answer'].replace("<s>[INST]", "").replace("[/INST]</s>","").strip()}
     return response_answer
+
+# Endpoint para preguntar al PDF usando OpenAI
+@app.route("/ask_pdf_openai", methods=["POST"])
+def askPDFOpenAI():
+    print("POST /ask_pdf_openai usado")
+    try:
+        json_content = request.json
+        query = json_content.get("query")
+        print(f"query: {query}")
+        
+        response = ask_pdf_with_openai(query, folder_path, embedding)
+        return response
+    
+    except Exception as e:
+        return {"error": f"Error en el endpoint: {str(e)}"}, 500
 
 # Resetear la base de datos vectorial y limpiar el path db (ChromaDB)
 @app.route("/reset_db", methods=["POST"])
