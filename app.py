@@ -1,8 +1,8 @@
 from flask import Flask, request
 import os
 from flask_cors import CORS
-from langchain_community.llms import Ollama
-from langchain_community.vectorstores import Chroma
+from langchain_ollama import OllamaLLM
+from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_community.document_loaders import PDFPlumberLoader
@@ -20,7 +20,7 @@ CORS(app, resources={r"/*": {"origins": ["http://localhost:3000"]}})
 
 folder_path ="db"
 
-llm= Ollama(model="deepseek-r1:8b", temperature=0.3, num_predict=512) #el num_predict es el tamaño del prompt que se le pasa al modelo de LLM (conocido como max tokens)
+llm= OllamaLLM(model="qwen2.5-coder:14b", temperature=0.3, num_predict=512) #el num_predict es el tamaño del prompt que se le pasa al modelo de LLM (conocido como max tokens)
 embedding = FastEmbedEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2") #el modelo de embedding que agregue para los pdf en español
 text_splitter= RecursiveCharacterTextSplitter(
     chunk_size= 1024, chunk_overlap=80, 
